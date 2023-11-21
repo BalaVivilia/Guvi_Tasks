@@ -67,5 +67,41 @@ ________________________________________________________________________________
 
 4) Write a java program to find smallest number among 3 numbers.
    ------------------------------------------------------------
+import java.util.Scanner;
+public class SmallestOf3 {
+    public static void main(String[] args) {
+        Scanner scan= new Scanner(System.in);
+        System.out.println("Enter 3 numbers: ");
 
+       // getting inputs using Scanner clas and storing in num1,num2,num3 variables.
+
+        int num1=scan.nextInt();
+        int num2=scan.nextInt();
+        int num3=scan.nextInt();
+
+        // using if,else if condition and appropriate operator find the smallest number.
+
+        if(num1<num2 && num1<num3)
+        {
+            System.out.println("Num1 "+num1+" is smallest");
+        }
+        else if(num2<num3 && num2<num1)
+        {
+            System.out.println("Num2 "+num2+" is smallest");
+        }
+       else if(num3<num1 && num3<num2)
+        {
+            System.out.println("Num3 "+num3+" is smallest");
+        }
+        else{
+            System.out.println("All the numbers are equal");
+        }
+    }
+}
+
+_______________________________________________________________________________________________________________
+
+5) Write a java program that takes the purchase amount as input and calculates the final payable amount after 
+applying the discount.
+ ------------------------------------------------------------------------------------------------------------
 
