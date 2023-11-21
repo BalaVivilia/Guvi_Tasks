@@ -105,3 +105,36 @@ ________________________________________________________________________________
 applying the discount.
  ------------------------------------------------------------------------------------------------------------
 
+import java.util.Scanner;
+public class FinalAmount {
+    public static void main(String[] args) {
+        Scanner scan= new Scanner(System.in);
+        System.out.println("Enter the amount: ");
+        int amount=scan.nextInt();
+        int finalAmount=0;
+        int discountAmount=0;
+
+// No discount if the amount is below 500.
+
+        if(amount<500){
+            finalAmount=amount;
+            
+        }
+
+//Discount 10% if the amount is between 500 to 1000
+        else if(amount>=500 && amount<=1000)
+        {
+            discountAmount=amount*10/100;
+            finalAmount=amount-discountAmount;
+        }
+//Discount 20% if amount is above 1000.
+        else if(amount>1000)
+        {
+            discountAmount=amount*20/100;
+            finalAmount=amount-discountAmount;
+        }
+//print the final amount after discounts.
+        System.out.println("The Final Amount is: " +finalAmount);
+    }
+}
+_______________________________________________________________________________________________________________
