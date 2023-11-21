@@ -42,3 +42,30 @@ ________________________________________________________________________________
 3) Write a java program to reverse a given number using loop.
    ---------------------------------------------------------
 
+import java.util.Scanner;
+public class Reverse_Number {
+    public static void main(String[] args) {
+    //getting input using Scanner class
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter the number: ");
+        int num = scan.nextInt();
+        System.out.println("Number is: " +num);
+        int reverse=0;
+     // iterating using while loop and reversing the number and storing in reverse variable.
+        while(num!=0)
+        {
+            int remainder=num%10;
+            reverse=reverse*10+remainder;
+            num=num/10;
+        }
+        System.out.println("The reversed number is: " +reverse);
+    }
+}
+
+________________________________________________________________________________________________________________
+
+
+4) Write a java program to find smallest number among 3 numbers.
+   ------------------------------------------------------------
+
+
