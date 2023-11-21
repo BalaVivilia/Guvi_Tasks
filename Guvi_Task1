@@ -4,6 +4,7 @@
 import java.util.Scanner;
 public class SimpleForLoop {
     public static void main(String[] args) {
+   //using for loop iterating and printing the values.
         for(int i=10;i<=50;i++)
         {
             System.out.println(i);
@@ -11,8 +12,33 @@ public class SimpleForLoop {
     }
 }
 
---------------------------------------------------------------------------------------------------------------------------------------------
+______________________________________________________________________________________________________________________
 
 2) Write a program to find whether the given number is positive or negative.
    ------------------------------------------------------------------------
+
+import java.util.Scanner;
+public class PositiveOrNegativeNum {
+    public static void main(String[] args) {
+        // Getting input using Scanner class and storing in num variable.
+        Scanner scan = new Scanner(System.in);
+        int num = scan.nextInt();
+        if(num<0)
+        {
+            System.out.println("The given number is a negative number.");
+        }
+        else if(num>0)
+        {
+            System.out.println("The given number is a positive number.");
+        }
+        else{
+            System.out.println("The given number is zero.");
+        }
+    }
+}
+
+___________________________________________________________________________________________________________
+
+3) Write a java program to reverse a given number using loop.
+   ---------------------------------------------------------
 
