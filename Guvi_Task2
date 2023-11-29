@@ -6,8 +6,9 @@ Intialize person object with name and age.
 Write a method  to display age & name.
 
 
-Program:
--------
+
+Source code:
+------------
 
 public class Person {
     String name;                                               //variable Initialization.
@@ -38,8 +39,8 @@ create method to display balace of the account.
 
 
 
-program:
--------
+Source code:
+------------
 
 class Account {
     private double balance;                                    //Declaring balance and id data members.
@@ -89,4 +90,232 @@ Balance: 10000.0
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-1.4)
+1.4) Question:
+     ---------
+Define a base class Person with attributes name and age.
+Create subclass Employee that inherits Person and add attributes like employeeID and salary.
+Use the super keyword to initialize the Person attributes in the Employee constructor.
+
+
+
+Source code:
+-----------
+
+
+public class Person {                                          //Base class - Person with attributes name and age.
+     String name;
+     int age;
+	public Person(String name, int age) {                     //Base class constructor to initialize base class attributes.
+		this.name=name;
+		this.age=age;
+	}
+}
+
+public class Employee extends Person {                        //Derived class - Employee inheriting Person class as base.
+	int employeeID;                                          //Derived class attributes employeeID and salary.
+    int salary;
+    Employee(String name,int employeeID,int salary,int age)   //Derived class constructor
+    {
+        super (name,age);                                     //using super keyword initializing Person class attributes in Employee class.
+        this.employeeID=employeeID;
+        this.salary=salary;
+    }
+    void displayEmployeeDetails()                            //displayEmployeeDetails() method to display the employee details.
+    {
+        System.out.println("Name: " +name);
+        System.out.println("Employee ID: " +employeeID);
+        System.out.println("Salary: " +salary);
+        System.out.println("Age: "+age);
+    }
+
+	public static void main(String[] args) {                  //Main method
+		// TODO Auto-generated method stub
+		Employee emp=new Employee("Ashok",123,20000,21);    //Object creation and constructor initialization.
+        emp.displayEmployeeDetails();                        //calling displayEmployeeDetails() using the created object emp.
+
+	}
+
+}
+
+
+output:
+------
+
+Name: Ashok
+Employee ID: 123
+Salary: 20000
+Age: 21
+
+
+________________________________________________________________________________________________________________________________
+
+1.2) Question:
+     ---------
+create class Product(pid,price,quantity)with parametrized constructor.
+create a main function in different class(say XYZ) and perform the follow task:
+A. Accept 5 product information from user and store in an array.
+B. Find pid of the product with the highest price.
+C. create method(with array of product's object as argument)in XYZ class to
+calculate and return the total amount spend on all products
+(amount spend on single product=price of product*quantity of product).
+
+
+
+
+Source code:
+-----------
+
+
+public class Product {                                                //class 1 Product with attributes pid,price and quantity.
+	int pid;
+	int price;
+	double quantity;
+	Product(int pid,int price,double quantity)                       //Product constructor.
+	{
+		this.pid=pid;
+		this.price=price;
+		this.quantity=quantity;
+	}
+	public void display()                                           //Display method to display the stored values.
+	{
+		System.out.print("Procuct ID: "+pid+" Price: "+price+" Quantity: "+quantity);
+		System.out.println();
+	}
+
+}
+
+import java.util.Scanner;
+
+public class ProductDetails {                                         //class 2 
+	
+	                                                                 //Method to find the total amount spend on each product.
+	double totalAmount=0;
+     double amount;
+	public void totalAmountCalculation(Product pro[])
+	{
+		for(int i=0;i<5;i++) {
+             totalAmount= (pro[i].price*pro[i].quantity);                       //calculating the total amount of each product and storing it in totalAmount variable.
+             totalAmount=amount+totalAmount;
+		}
+		
+		                                                                        //Displaying the totalAmount spend on all products.
+		System.out.println("THE TOTAL AMOUNT SPEND ON ALL PRODUCT IS: " +totalAmount);
+		
+	}
+
+
+	public static void main(String[] args) {
+		
+		ProductDetails prodetail=new ProductDetails();                     //Object creation for ProductDetails class.
+		
+		Product[] pro=new Product[5];                                     //Declaring array object with size 5.
+		Scanner sc=new Scanner(System.in);                               // Creating scanner object to get input.
+		for(int i=0;i<5;i++)
+		{
+			                                                         //Getting inputs and storing in the respective variable.
+			
+			System.out.print("Enter Product ID: ");
+			int pid=sc.nextInt();
+			System.out.print("Enter Product Prize: ");
+			int price=sc.nextInt();
+			System.out.print("Enter the Product quantity: ");
+			double quantity=sc.nextDouble();
+			pro[i]=new Product(pid,price,quantity);
+			System.out.println("----------------------------------");
+		}
+		
+		
+          	                                                    //Displaying the stored inputs.
+		
+		System.out.println("The PRODUCT ID, PRICE and QUANTITY are: ");
+		System.out.println();
+		for(int i=0;i<5;i++)
+		{
+		  pro[i].display();                         //calling display method in Product method to display the values.
+		  System.out.println();
+		}
+		System.out.println("-------------------------------------");
+		
+		
+		
+	                                        	//Using for loop and iterating to find the Product ID with highest Price
+		
+		int maxProID=0;                         //maxProID variable to store highest priced Product ID.
+		
+		for(int i=0;i<5;i++)
+		{
+			for(int j=i+1;j<5;j++)
+			{
+		       if(pro[i].price < pro[j].price)      //using if statement finding the highest priced Product ID.
+		       {
+		    	   maxProID=pro[j].pid;
+		       }
+		       else {
+		    	   maxProID=pro[i].pid;
+		       }
+			}
+		}
+		
+		System.out.println("THE PRODUCT ID(pid) WITH HIGHEST PRICE IS: " +maxProID);      //Printing the produtID with highest price.
+		System.out.println();
+		System.out.println("----------------------------------------");
+		System.out.println();
+		
+		
+		prodetail.totalAmountCalculation(pro);                                           //calling the totalAmountCalculation method to return the totalAmount.
+		
+		
+
+	}
+
+}
+
+
+
+OUTPUT:
+-------
+
+
+Enter Product ID: 111
+Enter Product Prize: 100
+Enter the Product quantity: 1
+----------------------------------
+Enter Product ID: 222
+Enter Product Prize: 200
+Enter the Product quantity: 2
+----------------------------------
+Enter Product ID: 333
+Enter Product Prize: 300
+Enter the Product quantity: 3
+----------------------------------
+Enter Product ID: 444
+Enter Product Prize: 400
+Enter the Product quantity: 4
+----------------------------------
+Enter Product ID: 555
+Enter Product Prize: 500
+Enter the Product quantity: 5
+----------------------------------
+The PRODUCT ID, PRICE and QUANTITY are: 
+
+Procuct ID: 111 Price: 100 Quantity: 1.0
+
+Procuct ID: 222 Price: 200 Quantity: 2.0
+
+Procuct ID: 333 Price: 300 Quantity: 3.0
+
+Procuct ID: 444 Price: 400 Quantity: 4.0
+
+Procuct ID: 555 Price: 500 Quantity: 5.0
+
+-------------------------------------
+
+THE PRODUCT ID(pid) WITH HIGHEST PRICE IS: 555
+
+----------------------------------------
+
+THE TOTAL AMOUNT SPEND ON ALL PRODUCT IS: 5500.0
+
+
+
+___________________________________________________________________________________________________________________________________________________________________
