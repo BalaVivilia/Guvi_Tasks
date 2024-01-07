@@ -7,6 +7,7 @@ create table Emp1(empno integer,ename varchar(20),job varchar(20),mgr integer,hi
 comm float,deptno integer);
 
 
+
 //Query to insert values into Emp1 table.
 
 insert into Emp1 values(8369,'SMITH','CLERK',8902,'1990-12-18',800.00,NULL,20),
@@ -19,6 +20,7 @@ insert into Emp1 values(8369,'SMITH','CLERK',8902,'1990-12-18',800.00,NULL,20),
 (8888,'SCOTT','ANALYST',8566,'1992-12-09',3000.00,NULL,20),
 (8839,'AMIR','PRESIDENT',NULL,'1991-11-18',5000.00,NULL,10),
 (8844,'KULDEEP','SALESMAN',8698,'1991-09-08',1500.00,0.00,30);
+
 
 ------------------------------------------------------------------------------------------------
 //Query to display ename,sal of employees whose salary is greater than or equal to 2200.
@@ -51,16 +53,80 @@ insert into Emp1 values(8369,'SMITH','CLERK',8902,'1990-12-18',800.00,NULL,20),
 1.F) select ename from Emp1 where ename like'%T';
 --------------------------------------------------------------------------------------------------
 
-____________________________________________________________________________________________________________________________________________________________________________
 
 
-Question 2:
+OUTPUT:
+_______
+
+ScreenShot is attached in the repository with respective Question Number.
+
+
+___________________________________________________________________________________________________________________________________________________________________
+
+
+QUESTION 2:
 ___________
 
 2)Write a program for JDBC connectivity and insert the below data.
 
-Solution:
+PROGRAM:
 _________
+
+package com.jdbcdemo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class JdbcInsertQuery {
+
+
+  //URL,user and password to connect with local Mysql workbench.
+  //Insert Query to insert the respective values into empDetails table create in MySql.
+
+
+	static final String URL="jdbc:mysql://localhost:3306/dummy";
+	static final String USER="root";
+	static final String PWD="bala@2003";
+	static final String QUERY="insert into empDetails values(101,'Jenny',25,10000),(102,'Jacky',30,20000),(103,'Joe',20,40000),"
+			+ "(104,'John',40,80000),(105,'Shameer',25,90000)";
+
+
+
+	public static void main(String[] args) {                            //Main method.
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");                       //Establisihing Jdbc connect using respective mysql driver
+		}
+		catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();                                             //To handle exceptions if any error occurs during JDBC connection.
+		}
+		try {
+			Connection con=DriverManager.getConnection(URL, USER, PWD);     //Establising the JDBC connection using getConnection() method. 
+      PreparedStatement pst=con.prepareStatement(QUERY);              //prepareStatement() method to execute the Query.
+			pst.executeUpdate();
+		}
+		
+		catch(SQLException ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+}
+
+
+
+
+OUTPUT:
+_______
+
+Mysql workbench screenshot is attached in this repository with the respective question number.
+
+
+__________________________________________________________________________________________________________________________________________________________________
+
 
 
 
