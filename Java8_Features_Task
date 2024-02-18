@@ -1,0 +1,159 @@
+1.) QUESTION 1:
+  --------------
+Convert a list of Strings into uppercase using map() method.
+Stream names=Stream.of("aBc","d","ef").
+
+
+PROGRAM:
+--------
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class UpperCaseConversion {
+	
+	    public static void main(String[] args) {
+	        Stream<String> strings = Stream.of("aBc", "d", "ef");                                                  //Define the stream of strings elements                               
+
+
+          //Using map() method toUpperCase() method apply UpperCase to all the strings in the stream.
+          //Convert all the strings to uppercase and store it in a new list uppercaseElements.
+
+
+	        List<String> uppercaseStrings = strings.map(String::toUpperCase).collect(Collectors.toList());
+	        
+	        System.out.println(uppercaseStrings);                                                                 //Display the uppercaseStrings list.
+	}
+}
+
+
+
+OUTPUT:
+-------
+
+[ABC, D, EF]
+
+
+__________________________________________________________________________________________________________________________________________________________________________
+
+2.) QUESTION 2:
+  -------------
+Check whether the string in the list is empty or not and print the non-empty string.
+The given list is: Liststrings=Arrays.asList("abc","","bc","efg","abcd","","jkl").
+
+
+PROGRAM:
+--------
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class NonEmptyString {
+    public static void main(String[] args) {
+        List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");                                       //Defining a list.
+
+
+        //Using streams() and filter() filter the strings list by checking whether the string is empty or not and store the non-empty string or element into str. 
+       // By using the collectors.toList() create a new List noneEmptyStrings and store the non-empty strings in the nonEmptyStrings list.
+
+
+        List<String> nonEmptyStrings = strings.stream().filter(str -> !str.isEmpty()).collect(Collectors.toList());
+        
+        System.out.println("List of non-empty strings are: "+nonEmptyStrings);                                                //Displaying the nonEmptyStrings list.
+    }
+}
+
+
+OUTPUT:
+-------
+
+List of non-empty strings are: [abc, bc, efg, abcd, jkl]
+
+
+________________________________________________________________________________________________________________________________________________________________________
+
+3.) QUESTION 3:
+  -------------
+
+Filter and Separate a list of Students name starting with A using List interface ,Lambda expression and Stream API.
+
+
+PROGRAM:
+--------
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StudentsNameFilter {
+    public static void main(String[] args) {
+        List<String> studentNames = Arrays.asList("Ann", "Bala","Alex", "Amirtha","Rithik", "Alice");                              //Defining a list of elements.
+
+
+        //Using streams() and filter() filter the studentNames list by the names starting with A and store in name. 
+       // By using the collectors.toList() create a new List StudentsWithA and store the students names starting with A.
+
+
+        List<String> studentsWithA = studentNames.stream().filter(name -> name.startsWith("A")).collect(Collectors.toList());     
+        
+        System.out.println("Students name starting with A are: " + studentsWithA);                                                //Display the StudentsWithA list.
+    }
+}
+
+
+
+OUTPUT:
+-------
+
+Students name starting with A are: [Ann, Alex, Amirtha, Alice]
+
+
+____________________________________________________________________________________________________________________________________________________________________________
+
+4.) QUESTION 4:
+    -----------
+ Write a program to get the birth date from the user and calculate the age of the user using  java.time.LocalDate class.
+
+
+PROGRAM:
+---------
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Scanner;
+
+public class AgeCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter your birth date (yyyy-mm-dd): ");
+        String date = scanner.nextLine();                                                                //Getting the birth date from the user.
+        
+        LocalDate birthDate = LocalDate.parse(date);                                                    //Parsing the String birth date input to Local Date.
+        LocalDate currentDate = LocalDate.now();                                                       //Using now() method finding the currentDate.
+        
+        Period period = Period.between(birthDate, currentDate);       //Finding the difference of years,months,date between the birthDate(Start date),currentDate(end date).
+        
+        int years = period.getYears();                                                           //Getting the difference years.
+        int months = period.getMonths();                                                         //Getting the difference months.
+        int days = period.getDays();                                                            //Getting the difference days.
+        
+        System.out.println("Your age is: " +years+" years, " +months+ " months, and " +days+ " days.");     //Displayong the current age by years-months-days.
+    }
+}
+
+
+
+OUTPUT:
+--------
+
+
+Enter your birth date (yyyy-mm-dd): 1990-05-15
+Your age is: 33 years, 9 months, and 3 days.
+
+
+
+_____________________________________________________________________________________________________________________________________________________________________________
