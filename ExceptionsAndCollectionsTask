@@ -1,0 +1,487 @@
+1.) QUESTION 1:
+  -----------
+Ramesh is developing a student management system help him to handle the exceptions.
+Create a student class with rollNo,name,age and course as attributes and initialize the values using parameterized constructor.
+i) If the age of the student is not between 15 and 20 then raise a error message "AgeNotWIthinRangeException".
+ii) If the name of the student contains numbers and special symbols then raise a error message "NameNotValidException".
+
+
+PROGRAM:
+--------
+
+import java.util.Scanner;
+
+class AgeNotWithinRangeException extends Exception {                                 //Defining AgeNotWithinRangeException class. 
+    public AgeNotWithinRangeException(String message) {
+        super(message);
+    }
+}
+
+class NameNotValidException extends Exception {                                        //Defining NameNotException class.
+    public NameNotValidException(String message) {
+        super(message);
+    }
+}
+
+class Student {                                                                       // Define Student class and declaring the variables rollNo,name,age,course.
+    int rollNo;
+    String name;
+    int age;
+    String course;
+
+    // Parameterized constructor that throws AgeNotWithinRangeException and NameNotValidException 
+
+    public Student(int rollNo, String name, int age, String course) throws AgeNotWithinRangeException, NameNotValidException {
+        
+        this.rollNo = rollNo;                                                                           //Initializing the values.
+        this.age = age;
+        this.name = name;
+        this.course = course;
+
+        if (age<15 || age>21) {                                                                   //Checking whether the age is between 15 to 21 
+            throw new AgeNotWithinRangeException("Age should be between 15 and 21");                  //If the age is not between 15 to 21 throwing a error message.
+        }
+
+        if (!name.matches("[a-zA-Z ]+")) {                                                            //Checking whether the name does not contain numbers and special characters    
+            throw new NameNotValidException("Name should not contain numbers or special symbols");    //If the name contsins numbers and special characters throwing a error message.
+        }
+    }
+
+    //Getters 
+    public int getRollNo() {                          
+        return rollNo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+}
+
+
+public class Main {                                                                                  //Main class
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);                                                   //Main method
+
+        try {
+            System.out.println("Enter student details:");                                        //Getting input from the user using scanner.
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Roll No: ");
+            int rollNo = scanner.nextInt();
+            scanner.nextLine(); 
+            System.out.print("Age: ");
+            int age = scanner.nextInt();
+            scanner.nextLine(); 
+            System.out.print("Course: ");
+            String course = scanner.nextLine();
+
+            Student student = new Student(rollNo, name, age, course);                      //Creating object for the Student class.
+            
+            System.out.println("Student Details:");                                     //Displaying the students details by using the getters set.
+            System.out.println("Name: " + student.getName());
+            System.out.println("Roll No: " + student.getRollNo());
+            System.out.println("Age: " + student.getAge());
+            System.out.println("Course: " + student.getCourse());
+        } 
+        catch (AgeNotWithinRangeException e) {                                           //Catching the exceptions catch and printing the respective error message for the exception.
+            System.out.println("Error Message: " + e.getMessage());
+        } 
+        catch (NameNotValidException e) {
+            System.out.println("Error Message: " + e.getMessage());
+        } 
+    }
+}
+
+
+
+
+OUTPUT:
+--------
+
+Output for AgeNotWithinRangeException:
+--------------------------------------
+Enter student details:
+Name: Bala
+Roll No: 10
+Age: 12
+Course: BCA
+Error Message: Age should be between 15 and 21
+
+
+Output for NameNotValidException:
+----------------------------------
+Enter student details:
+Name: bala@190
+Roll No: 10
+Age: 17
+Course: BCA
+Error Message: Name should not contain numbers or special symbols
+
+
+Normal Output without Ezceptions:
+----------------------------------
+Enter student details:
+Name: Bala
+Roll No: 10
+Age: 18
+Course: BCA
+
+Student Details:
+Name: Bala
+Roll No: 10
+Age: 18
+Course: BCA
+
+______________________________________________________________________________________________________________________________________________________________________________________________________
+
+2.) QUESTION 2:
+   -----------
+Create a class Voter(voterld, name, age) with parameterized constructor. 
+The parameterized constructor should throw a checked exception if age is less than 18. The message of exception is "invalid age for voter"
+
+
+PROGRAM:
+--------
+
+import java.util.Scanner;
+
+class InvalidAgeException extends Exception {                                                           //Custom Exception class extending Exception.
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+class Voter {                                                                                         //Defining Voter class with respective variables.
+    int voterId;
+    String name;
+    int age;
+
+    public Voter(int voterId, String name, int age) throws InvalidAgeException {              //Parameterized constructor with the custom exception class.
+        
+        this.voterId = voterId;                                                               //Initializing the variables.
+        this.name = name;
+        this.age = age;
+        
+        if (age<18) {                                                                          //Checking whether the age is less than 18 and throwing the error message.
+            throw new InvalidAgeException("Invalid age for voter");
+        }
+    }
+
+    public void display() {                                                                    //display() method to display the Voter details.
+        System.out.println("Voter ID: " +voterId);
+        System.out.println("Name: " +name);
+        System.out.println("Age: " +age);
+    }
+}
+
+class Main {                                                                           //Main class.
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.println("Enter Voter details:");                                         //Getting input fro the user.
+            System.out.print("Voter ID: ");
+            int voterId = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Age: ");
+            int age = scanner.nextInt();
+
+            Voter voter = new Voter(voterId, name, age);                                          //Creating object for the Voter class and calling the display() method.
+            voter.display();
+            
+        } catch (InvalidAgeException e) {                                                        //Catching the InvalidAgeException and displaying the respective error message.
+            System.out.println("Error Message: " + e.getMessage());
+        } 
+    }
+}
+
+
+
+OUTPUT:
+------
+
+Enter Voter details:
+Voter ID: 123
+Name: Bala
+Age: 17
+Error Message: Invalid age for voter
+
+
+______________________________________________________________________________________________________________________________________________________________________________________________________
+3.) QUESTION 3:
+   ------------
+Store name of weekdays in an array (starting from "Sunday" at 0 index). 
+Ask day position from user and print day name. 
+Handle array index out of bound exception and give proper message if user enters day index outside range (0-6).
+
+PROGRAM:
+-------
+
+import java.util.Scanner;
+
+class WeekDaysArrayException {
+    public static void main(String[] args) {
+        String[] weekdays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};      //Declaring the weekdays[] array.
+
+        Scanner scanner = new Scanner(System.in);                                               
+        System.out.print("Enter the day position (0-6): ");                                                    //Using Scanner getting the dayPosition of the weekday.
+        int dayPosition = scanner.nextInt();
+
+        try {
+            String dayName = getDayName(weekdays, dayPosition);                                           //Creating a String variable dayName and assisning the getDayName() method returned value.
+            System.out.println("Day name: " +dayName);                                                  //Displaying the dayName to the  user.
+        }
+        catch (ArrayIndexOutOfBoundsException e) {                                                     //Catching ArrayIndexOutOfBoundsException exception.
+            System.out.println("Error: Day index out of range (0-6)");                                 //Displaying the error message.
+        }
+    }
+
+    public static String getDayName(String[] weekdays, int position) {                              //Method to getday name from the array.
+        return weekdays[position];
+    }
+}
+
+
+OUTPUT:
+-------
+Enter the day position (0-6): 7
+ERROR!
+Error: Day index out of range (0-6)
+
+
+
+______________________________________________________________________________________________________________________________________________________________________________________________________
+
+4.) QUESTION 4:
+    -----------
+Create a HashMap where keys are student names (strings) and values are their corresponding grades (integers). 
+Create methods to add a new student, remove a student, and Display up a student's grade by name.
+
+
+PROGRAM:
+--------
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+class  StudentGradeSystem {
+    public Map<String, Integer> studentGrades;
+
+    public StudentGradeSystem() {                                                                                                  //Default Constructor.
+        studentGrades = new HashMap<>();                                                                                          //Defining new HashMap
+    }
+
+    public void addStudent(String name, int grade) {                                                                             //Method to add a new student.
+        studentGrades.put(name, grade);
+        System.out.println("Student " +name+ " added with grade "+grade);
+    }
+
+    public void removeStudent(String name) {                                                                                   //Method to remove a student
+        if (studentGrades.containsKey(name)) {
+            studentGrades.remove(name);
+            System.out.println("Student " +name+" removed successfully");
+        } else {
+            System.out.println("Student " +name+ " not found");
+        }
+    }
+
+    public void displayGrade(String name) {                                                                                 // Method to display a student's grade by name
+        Integer grade = studentGrades.get(name);
+        if (grade!=null) {
+            System.out.println("Grade of student "+name+" is: "+grade);
+        } else {
+            System.out.println("Student "+name+" not found");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+         StudentGradeSystem gradeSystem = new  StudentGradeSystem();                                    //Creating object for the class StudentGradeSystem.
+
+        boolean running = true;
+        while (running) {
+            System.out.println("\nChoose an option:");                                                   //Displaying the options to the users.
+            System.out.println("1. Add a student");
+            System.out.println("2. Remove a student");
+            System.out.println("3. Display a student's grade");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = scanner.nextInt();                                                               //Getting choice from the user.
+            scanner.nextLine(); 
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter student name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter student grade: ");
+                    int grade = scanner.nextInt();
+                    gradeSystem.addStudent(name, grade);
+                    break;
+                case 2:
+                    System.out.print("Enter student name to remove: ");
+                    String removeName = scanner.nextLine();
+                    gradeSystem.removeStudent(removeName);
+                    break;
+                case 3:
+                    System.out.print("Enter student name to display grade: ");
+                    String displayName = scanner.nextLine();
+                    gradeSystem.displayGrade(displayName);
+                    break;
+                case 4:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+}
+
+
+
+
+OUTPUT:
+--------
+Output to enter new Student:
+---------------------------
+Choose an option:
+1. Add a student
+2. Remove a student
+3. Display a student's grade
+4. Exit
+Enter your choice: 1
+Enter student name: Ann
+Enter student grade: 1
+Student Ann added with grade 1
+
+Output for Displaying the student detail:
+-----------------------------------------
+Choose an option:
+1. Add a student
+2. Remove a student
+3. Display a student's grade
+4. Exit
+Enter your choice: 3
+Enter student name to display grade: Ann
+Grade of student Ann is: 1
+
+Output for removing a student:
+------------------------------
+Choose an option:
+1. Add a student
+2. Remove a student
+3. Display a student's grade
+4. Exit
+Enter your choice: 2
+Enter student name to remove: Ann
+Student Ann removed successfully
+
+Output for Exit Option:
+------------------------
+Choose an option:
+1. Add a student
+2. Remove a student
+3. Display a student's grade
+4. Exit
+Enter your choice: 4
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________
+
+5.) QUESTION 5: 
+    ------------
+
+Question 5:
+-----------
+
+create a stack data structure to store Integers Create some methods for following functionalities.
+a. Include functions for pushing elements onto the stack.
+b. popping elements from the stack.
+
+
+PROGRAM:
+--------
+
+class Stack {
+    private int maxSize;
+    private int[] stackArray;
+    private int top;
+
+                                                                                                                 //Constructor to initialize the stack
+    public Stack(int maxSize) {
+        this.maxSize = maxSize;
+        this.stackArray = new int[maxSize];
+        this.top = -1;                                                                                           //Initially, the stack is empty
+    }
+
+    public void push(int value) {                                                                                  //Method to push an element into the stack
+        if (isFull()) {
+            System.out.println("\nStack is full cannot push element " +value);
+            return;
+        }
+        top++;
+        stackArray[top] = value;
+        System.out.println("Pushed "+value +" into the stack");
+    }
+
+    public int pop() {                                                                                //Method to pop an element from the stack
+        if (isEmpty()) {
+            System.out.println("\nStack is empty. Cannot pop element.");
+            return -1;                                                                               //Returning a default value indicating failure
+        }
+        int poppedValue = stackArray[top];
+        top--;
+        System.out.println("\nPopped " + poppedValue + " from the stack");
+        return poppedValue;
+    }
+
+    public boolean isEmpty() {                                                              //Method to check if the stack is empty
+        return (top == -1);
+    }
+
+    public boolean isFull() {                                                              // Method to check if the stack is full
+        return (top == maxSize - 1);
+    }
+
+    public static void main(String[] args) {
+        Stack stack = new Stack(5);                                                         // Creating a stack with a maximum size of 5
+
+        stack.push(10);                                                                    //Pushing 5 values into the stack
+        stack.push(20);
+        stack.push(30);
+        stack.push(40);
+        stack.push(50);
+
+       stack.pop();                                                                       //Popping the last in out 
+       // stack.pop();
+       // stack.pop();
+       // stack.pop();
+       /// stack.pop();                                                                    
+    }
+}
+
+
+OUTPUT:
+------
+Pushed 10 onto the stack
+Pushed 20 onto the stack
+Pushed 30 onto the stack
+Pushed 40 onto the stack
+Pushed 50 onto the stack
+
+Popped 50 from the stack
+
+
+_______________________________________________________________________________________________________________________________________________________________________________________________________
